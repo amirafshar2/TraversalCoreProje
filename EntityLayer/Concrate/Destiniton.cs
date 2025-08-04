@@ -18,6 +18,19 @@ namespace EntityLayer.Concrate
         public string Description { get; set; }
         public int Capacity { get; set; }
         public bool Status { get; set; }
+        public string CoverImage { get; set; }
+        public string Title1 { get; set; }
+        public string Detail1 { get; set; }
+        public string Detail2 { get; set; }
+        public string Detail3{ get; set; }
+        public string Title3 { get; set; }
+        public string Detail4{ get; set; }
+        public string Title4 { get; set; }
+        public string Detail5 { get; set; }
+        public string Title5 { get; set; }
+        public string Image2{ get; set; }
+        public string Image3{ get; set; }
+
 
     }
 }

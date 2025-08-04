@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="de">
+
+<head>
+    <!-- Required meta tags -->
+    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_HeadLinkPartial.cshtml")
+    <!-- Template CSS -->
+</head>
+
+<body>
+    <!--header-->
+    @await Html.PartialAsync("~/views/shared/layoutpartial/_headerpartialview.cshtml")
+
+    <section class="w3l-about-breadcrumb text-left" style="height:250px">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            
+        </div>
+    </section>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!--header-->
+    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_FooterPartialview.cshtml")
+    <!--/w3l-footer-29-main-->
+    <!-- Template JavaScript -->
+    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_ScriptPartial.cshtml")
+    <!-- Template JavaScript -->
+</body>
+
+</html>
