@@ -17,12 +17,13 @@ namespace TraversalCoreProje.Controllers
         [HttpGet]
         public IActionResult Destiniton(int id)
         {
-            return View();
+            var q= manager.GetById(id);
+            return View(q);
         }
         [HttpPost]
         public IActionResult Destiniton(Destiniton p)
         {
-            return View(p);
+            return View();
         }
     }
 }

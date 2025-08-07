@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
 @model List<Destiniton>
+
 <!doctype html>
 <html lang="de">
 <head>
@@ -28,7 +29,7 @@
             <div class="container" style="margin: -218px 0px; position: absolute;">
                 <h2 class="title" style="color:azure">Reiseziele </h2>
                 <ul class="breadcrumbs-custom-path mt-2">
-                    <li><a href="#url">Home</a></li>
+                    <li><a href="/Home/Index/">Home</a></li>
                     <li class="active" style="color:lightgrey"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Reiseziele </li>
                 </ul>
             </div>
@@ -45,14 +46,15 @@
 
                         <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
                             <div class="column">
-                                <a href="blog-single.html"><img src="@item.Image" alt="" class="img-fluid"></a>
+                                <a href="@Url.Action("Destiniton","Destiniton",new { id = item.DestinationID })"><img src="@item.Image" alt="" class="img-fluid"></a>
                                 <div class="info">
-                                    <h4><a href="blog-single.html">@item.City</a></h4>
+                                    <h4><a href="">@item.City</a></h4>
                                     <p>@item.DayNight</p>
                                     <div class="dst-btm">
                                         <h6 class=""> Ab </h6>
                                         <span>@item.Price €</span>
                                     </div>
+                                   
                                 </div>
                             </div>
                         </div>

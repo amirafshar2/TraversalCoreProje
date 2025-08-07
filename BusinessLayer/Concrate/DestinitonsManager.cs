@@ -25,12 +25,15 @@ namespace BusinessLayer.Concrate
 
         public List<Destiniton> GetAll()
         {
-            return _ıDestinationDal.GetList();
+            var q = _ıDestinationDal.GetList();
+            List<Destiniton> list = new List<Destiniton>();
+            list.AddRange(q.Where(e=>e.Status== true));
+            return list;
         }
 
         public Destiniton GetById(int id)
         {
-            throw new NotImplementedException();
+          return _ıDestinationDal.Get(id);
         }
 
         public void Insert(Destiniton entity)

@@ -15,13 +15,12 @@
                 <div id="owl-demo1" class="owl-two owl-carousel owl-theme">
                     @foreach (var item in Model)
                     {
-
                         <div class="item">
                             <div class="testimonial-content">
                                 <div class="testimonial">
                                     <blockquote>
                                         <span class="fa fa-quote-left" aria-hidden="true"></span>
-                                       @item.Comment
+                                        @item.Comment
                                     </blockquote>
                                     <div class="testi-des">
                                         <div class="test-img">
@@ -35,9 +34,7 @@
                                 </div>
                             </div>
                         </div>
-
                     }
-
                 </div>
             </div>
         </div>
@@ -45,3 +42,4 @@
     </div>
     <!-- //grids -->
 </section>
+@await Html.PartialAsync("~/Views/Shared/LayoutPartial/_ScriptPartial.cshtml")

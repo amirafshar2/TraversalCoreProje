@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class m1 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,7 +73,19 @@ namespace DataAccessLayer.Migrations
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Detail1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Detail2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Detail3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Detail4 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title4 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Detail5 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title5 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image3 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -171,6 +184,34 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_testsimonials", x => x.TestimonialID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "comments",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CommentContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false),
+                    CommentData = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Destinitonid = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comments", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_comments_destinitons_Destinitonid",
+                        column: x => x.Destinitonid,
+                        principalTable: "destinitons",
+                        principalColumn: "DestinationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_comments_Destinitonid",
+                table: "comments",
+                column: "Destinitonid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -182,10 +223,10 @@ namespace DataAccessLayer.Migrations
                 name: "abouts2");
 
             migrationBuilder.DropTable(
-                name: "contacts");
+                name: "comments");
 
             migrationBuilder.DropTable(
-                name: "destinitons");
+                name: "contacts");
 
             migrationBuilder.DropTable(
                 name: "features");
@@ -204,6 +245,9 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "testsimonials");
+
+            migrationBuilder.DropTable(
+                name: "destinitons");
         }
     }
 }

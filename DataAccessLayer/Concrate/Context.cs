@@ -15,7 +15,7 @@ namespace DataAccessLayer.Concrate
         {
             optionsBuilder.UseSqlServer("server=.;database=TraversalDB;Integrated Security=True;");
         }
-         public DbSet<About> abouts { get; set; }
+        public DbSet<About> abouts { get; set; }
         public DbSet<About2> abouts2 { get; set; }
         public DbSet<Contact> contacts { get; set; }
         public DbSet<Destiniton> destinitons { get; set; }
@@ -25,5 +25,6 @@ namespace DataAccessLayer.Concrate
         public DbSet<Newsletter> newsletters { get; set; }
         public DbSet<SubAbout> subabouts { get; set; }
         public DbSet<Testimonial> testsimonials { get; set; }
+        public DbSet<Comment> comments { get; set; }
     }
 }
