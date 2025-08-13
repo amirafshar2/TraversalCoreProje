@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProje.Controllers
 {
+    [AllowAnonymous]
     public class DestinitonController : Controller
     {
         DestinitonsManager manager = new DestinitonsManager(new EfDestinitionDAL());

@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrate;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrate
 {
-    public class Context : DbContext
+    public class Context :IdentityDbContext<User,Roll,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- index.html  21 Nov 2019 03:44:50 GMT -->
+<head>
+    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_HeadlinkPartial.cshtml")
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar sticky">
+                <div class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li>
+                            <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn"> <i data-feather="align-justify"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                                <i data-feather="maximize"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <form class="form-inline mr-auto">
+                                <div class="search-element">
+                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
+                                    <button class="btn" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                @await Html.PartialAsync("/Areas/Member/Views/_UserLayoutPartial/_NavbarPartial.cshtml")
+            </nav>
+            <div class="main-sidebar sidebar-style-2">
+                <!-- Es gibt Logo auch in dise Partialview -->
+               @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_SidbarPartial.cshtml")
+            </div>
+            <!-- Main Content -->
+            <div class="main-content">
+                <section class="section">
+                    @RenderBody()
+                </section>
+                <div class="settingSidebar">
+                    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_SettingsidebarPartial.cshtml")
+                </div>
+            </div>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    <a href="templateshub.net">Templateshub</a>
+                </div>
+                <div class="footer-right">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- General JS Scripts -->
+    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_ScriptPartial.cshtml")
+</body>
+
+
+<!-- index.html  21 Nov 2019 03:47:04 GMT -->
+</html>
