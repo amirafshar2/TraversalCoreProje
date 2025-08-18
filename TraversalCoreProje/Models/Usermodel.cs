@@ -17,6 +17,9 @@ namespace TraversalCoreProje.Models
         [Required(ErrorMessage = "Bitte schreiben Sie Ihren PasswordConfirm")]
         [Compare("Password",ErrorMessage =("Die Wörter reimen sich also nicht."))]
         public string PasswordConfirm { get; set; }
-
+        [Required(ErrorMessage = "Bitte wählen Sie ihr Geschlescht")]
+        public string Gender { get; set; }
+        [Required(ErrorMessage = "Bitte wählen Sie ihr photo")]
+        public IFormFile imagefile { get; set; }
     }
 }

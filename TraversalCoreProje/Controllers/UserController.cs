@@ -69,10 +69,36 @@ namespace TraversalCoreProje.Controllers
                 Email = p.Email,
                 PhoneNumber = p.Telefonno,
                 UserName = p.Email,
-                PasswordHash = p.Password,
-                Image = "null",
-                gender = "null"
+                PasswordHash = p.Password,                
+                gender = p.Gender
             };
+            if (p.imagefile!= null)
+            {
+
+                if (p.imagefile != null && p.imagefile.Length > 0)
+                {
+                    // مسیر پوشه
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+
+                    // اگه پوشه وجود نداره، بسازش
+                    if (!Directory.Exists(uploadsFolder))
+                        Directory.CreateDirectory(uploadsFolder);
+
+                    // نام فایل یونیک
+                    var uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(p.imagefile.FileName);
+
+                    var filePath = Path.Combine(uploadsFolder, uniqueName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await p.imagefile.CopyToAsync(stream);
+                    }
+
+                    // مسیر نسبی برای ذخیره تو دیتابیس
+                    user.Image = "/uploads/" + uniqueName;
+                }
+            }
+         
             if (p.Password == p.PasswordConfirm)
             {
                 var q = await _userManager.CreateAsync(user, p.PasswordConfirm);

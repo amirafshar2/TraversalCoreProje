@@ -18,6 +18,10 @@ namespace EntityLayer.Concrate
         public string  TwiterUrl { get; set; }
         public string InstgramUrl { get; set; }
         public bool Status { get; set; }
+        public List<User> UserCostumer  { get; set; }
+        public List<Reservition> reservitions { get; set; }
+        List<Destiniton> destinitons { get; set; }
+
 
     }
 }

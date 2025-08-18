@@ -103,10 +103,11 @@
     <div class="input-grids row">
 
         <div class="form-group col-lg-6">
-            <input id="name" type="text" name="Name" class="form-control" placeholder="Your Name*"
-                   required="">
+            <input id="name" style="visibility:hidden;" type="text" name="Name" class="form-control" placeholder="Your Name*"  required="">
         </div>
-
+        <div id="alert" style="color:red; margin-bottom:10px; display:none;">
+            <a id="ale" href="/User/Login/">Login</a>
+        </div>
     </div>
 
     <div class="submit text-right">
@@ -115,59 +116,67 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).ready(function () {
+        var isLoggedIn = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
 
-    $('#commentbtn').click(function () {
-        // ایجاد شیء جدید برای ارسال به سرور
-        var mComment = {
-            CommentUser: $('#name').val(),
-            CommentContent: $('#comment').val(),
-            Destiniton: $('#idd').val()
-        };
+       
 
-        $.ajax({
-            url: '/Comment/AddComment',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(mComment),
-            success: function (response) {
-                if (response.success) {
-                    var addedComment = response.comment;
-                    var commentHtml = createCommentHtml(addedComment.name, addedComment.content, "Just now");
-                    $('#comments-list').append(commentHtml);
-                    $('#comment').val('');
-                    $('#name').val('');
-                }
-            },
-            error: function (errorThrown) {
-                console.log(errorThrown);
+        $('#commentbtn').click(function () {
+            if (!isLoggedIn) {
+                $("#alert").html('Sie müssen sich anmelden! Bitte melden Sie sich an, um einen Kommentar abzugeben. <a href="/User/Login/">Login</a>');
+                $("#alert").fadeIn();
+                return;
             }
+
+
+            var mComment = {
+                CommentUser: '@User.Identity.Name',
+                CommentContent: $('#comment').val(),
+                DestinationId: $('#idd').val()
+            };
+
+            $.ajax({
+                url: '/Comment/AddComment',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(mComment),
+                success: function (response) {
+                    if (response.success) {
+                        var addedComment = response.comment;
+                        var commentHtml = createCommentHtml(addedComment.name, addedComment.content, "Just now");
+                        $('#comments-list').append(commentHtml);
+                        $('#comment').val('');
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                    alert('Yorum eklenirken bir hata oluştu.');
+                }
+            });
         });
+
+        function createCommentHtml(commentUser, commentContent, commentDate) {
+            return `
+                    <div class="media mt-4">
+                        <div class="img-circle">
+                            <img src="/Traversal-Liberty/assets/images/c1.jpg" class="img-fluid" alt="...">
+                        </div>
+                        <div class="media-body">
+                            <ul class="time-rply mb-2">
+                                <li>
+                                    <a href="#URL" class="name mt-0 mb-2 d-block">${commentUser}</a>
+                                    ${commentDate}
+                                </li>
+                                <li class="reply-last">
+                                    <a href="#reply" class="reply">Reply</a>
+                                </li>
+                            </ul>
+                            <p>${commentContent}</p>
+                        </div>
+                    </div>
+                `;
+        }
     });
-    // تابع ساخت HTML کامنت جدید
-    function createCommentHtml(commentUser, commentContent, commentDate) {
-        return `
-                <div class="media mt-4">
-                    <div class="img-circle">
-                        <img src="/Traversal-Liberty/assets/images/c1.jpg" class="img-fluid" alt="...">
-                    </div>
-                    <div class="media-body">
-                        <ul class="time-rply mb-2">
-                            <li>
-                                <a href="#URL" class="name mt-0 mb-2 d-block">${commentUser}</a>
-                                ${commentDate}
-                            </li>
-                            <li class="reply-last">
-                                <a href="#reply" class="reply">
-                                    Reply
-                                </a>
-                            </li>
-                        </ul>
-                        <p>
-                            ${commentContent}
-                        </p>
-                    </div>
-                </div>
-                                                                                                    `;
-    }
 </script>

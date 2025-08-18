@@ -19,20 +19,12 @@ namespace TraversalCoreProje.ViewComponents.User
 
             if (User.Identity.IsAuthenticated)
             {
-
                 var user = await _usermanager.GetUserAsync(HttpContext.User);
-                Userid = user.Id;
-                Usermodel u = new Usermodel()
-                {
-                    
-                    Email = user.Email,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Telefonno = user.Image
-                };
-                
-
-                return View(u);
+                ViewBag.Email = user.Email;
+                ViewBag.name = user.Name;
+                ViewBag.Surname = user.Surname;
+                ViewBag.Telefonno = user.Image;
+                return View();
             }
             return View(null);
         }

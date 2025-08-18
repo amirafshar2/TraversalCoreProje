@@ -1,69 +1,46 @@
-﻿@{
+﻿@model List<EntityLayer.Concrate.Destiniton>
+@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/MainLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model List<Destiniton>
-
-<!doctype html>
-<html lang="de">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Traversal Travel Category Bootstrap Responsive Template | Destinations </title>
-    <!-- google fonts -->
-    <link href="//fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
-          rel="stylesheet">
-    <!-- google fonts -->
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="~/Traversal-Liberty/assets/css/style-liberty.css">
-    <!-- Template CSS -->
-</head>
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container">
+            <h2 class="title">Reiseziele </h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a href="/Home/Index/">Home</a></li>
+                <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Reiseziele </li>
+            </ul>
+        </div>
+    </div>
+</section>
 <!-- //about breadcrumb -->
 <!--  Work gallery section -->
-<body>
-    <section class=" text-left" >
-        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-
-            <div class="container" style="margin: -218px 0px; position: absolute;">
-                <h2 class="title" style="color:azure">Reiseziele </h2>
-                <ul class="breadcrumbs-custom-path mt-2">
-                    <li><a href="/Home/Index/">Home</a></li>
-                    <li class="active" style="color:lightgrey"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Reiseziele </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="grids-1 py-5">
-        <div class="grids py-lg-5 py-md-4">
-            <div class="container">
-                <h3 class="hny-title mb-5">Reiseziele</h3>
-                <div class="row">
-                    @foreach (var item in Model)
-                    {
-
-                        <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                            <div class="column">
-                                <a href="@Url.Action("Destiniton","Destiniton",new { id = item.DestinationID })"><img src="@item.Image" alt="" class="img-fluid"></a>
-                                <div class="info">
-                                    <h4><a href="">@item.City</a></h4>
-                                    <p>@item.DayNight</p>
-                                    <div class="dst-btm">
-                                        <h6 class=""> Ab </h6>
-                                        <span>@item.Price €</span>
-                                    </div>
-                                   
+<section class="grids-1 py-5">
+    <div class="grids py-lg-5 py-md-4">
+        <div class="container">
+            <h3 class="hny-title mb-5">Reiseziele</h3>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
+                        <div class="column">
+                            <a href="@Url.Action("Destiniton","Destiniton",new {id = item.DestinationID})"><img src="@item.Image" alt="" class="img-fluid"></a>
+                            <div class="info">
+                                <h4><a href="">@item.City</a></h4>
+                                <p>@item.DayNight</p>
+                                <div class="dst-btm">
+                                    <h6 class=""> Ab</h6>
+                                    <span>@item.Price</span>
                                 </div>
                             </div>
+                            <br>
+                            <bottun class="btn btn-action bg-danger text-white">Reservieren</bottun>
                         </div>
-                    }
-
-                </div>
+                    </div>
+                }
             </div>
         </div>
-    </section>
-</body>
-</html>
-<script src="~/Traversal-Liberty/assets/js/bootstrap.min.js"></script>
+    </div>
+</section>
+<!--  //Work gallery section -->

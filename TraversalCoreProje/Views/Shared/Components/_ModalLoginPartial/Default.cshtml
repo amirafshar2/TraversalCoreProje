@@ -1,4 +1,4 @@
-﻿@model TraversalCoreProje.Models.Usermodel
+﻿
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -7,27 +7,26 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-@if (Model == null)
+@if (ViewBag.name == null)
 {
     <button class=" btn btn-style btn-secondary dropdown-toggle " style="height: 38px;"> <a href="/User/Login/" style="color:aliceblue">Anmelden </a></button>
 }
 else
 {
-
-
-    <div class="dropdown " >
+    <div class="dropdown ">
         <button class="btn btn-style btn-secondary dropdown-toggle" style="height: 38px;" type="button" data-toggle="dropdown">
-            Hi @Model.Name
+            Hi @ViewBag.name  @ViewBag.Surname
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
             <li><a asp-area="Member" asp-controller="Profile" asp-action="Index">Profile</a></li>
-            <li><a href="#">Neue Passwort</a></li>
-            <li>
-                <form method="post" asp-controller="User" asp-action="Logout">
-                    <button class="btn btn-style btn-secondary" type="submit">Abmelden</button>
-                </form>
-            </li>
+            <li><a href="@Url.Action("GetReservations", "Reservation", new { area = "Member" })">Reservatıon</a></li>
+            <li><a onclick="document.getElementById('form').submit();">Logout</a></li>
+
         </ul>
+    </div>
+    <div style="visibility:hidden">
+        <form method="post" id="form" asp-controller="User" asp-action="Logout">
+        </form>
     </div>
 }

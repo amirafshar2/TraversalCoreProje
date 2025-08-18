@@ -1,0 +1,61 @@
+﻿@model List<EntityLayer.Concrate.Reservition>
+@{
+    ViewData["Title"] = "GetReservations";
+    Layout = "~/Areas/Member/Views/UserLayout.cshtml";
+}
+
+
+
+<!-- card.html  21 Nov 2019 03:54:26 GMT -->
+<head>
+
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/bundles/chocolat/dist/css/chocolat.css">
+
+</head>
+
+
+
+
+<section class="section">
+    <div class="section-body">
+
+        <div class="row">
+
+            <div class="col-12 col-md-12 col-lg-12">
+                @foreach (var item in Model)
+                {
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4> </h4>
+                            <div class="card-header-action">
+                                <a href="#" class="btn btn-primary">View All</a>
+                                <div class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item has-icon"><i class="fas fa-eye"></i> View</a>
+                                        <a href="#" class="dropdown-item has-icon"><i class="far fa-edit"></i> Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item has-icon text-danger">
+                                            <i class="far fa-trash-alt"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Write something here</p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="~/otika-bootstrap-admin-template/assets/bundles/chocolat/dist/js/jquery.chocolat.min.js"></script>
+<script src="~/otika-bootstrap-admin-template/assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+

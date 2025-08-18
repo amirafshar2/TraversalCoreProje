@@ -1,51 +1,15 @@
-﻿<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+﻿@{
+    Layout = null;
+}
 <!doctype html>
-<html lang="de">
-
+<html lang="zxx">
 <head>
-    <!-- Required meta tags -->
-    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_HeadLinkPartial.cshtml")
-    <!-- Template CSS -->
+    @await Html.PartialAsync("/Views/Shared/LayoutPartial/_HeadLinkPartial.cshtml")
 </head>
-
 <body>
-    <!--header-->
-    @await Html.PartialAsync("~/views/shared/layoutpartial/_headerpartialview.cshtml")
-    <!--header-->
-    <!--Body-->
-    <!--Slider-->
-    @await Component.InvokeAsync("_SliderPartial")
-    <!--Slider-->
-    <!--//grids-->
-    <section class="w3l-grids-3 py-5">
-        <div class="container py-md-5">
-            @await Component.InvokeAsync("_GridsPartial")
-        </div>
-    </section>
-    <!--//grids-->
-    <div class="container">
-        @RenderBody()
-    </div>
-    <!--Body-->
-    @await Component.InvokeAsync("_StatsPartial")
-    <!-- //stats -->
-    <!-- //Gridstats -->
-    @await Component.InvokeAsync("_GridStatsPartial")
-    <!-- //Girdstats -->
-    <!--/About-w3l-bottom-->
-    @await Component.InvokeAsync("_AboutPartial")
-    <!--//About-w3l-bottom-->
-    <!-- testimonials -->
-    @await Component.InvokeAsync("_TestimonialsPartial")
-    <!--/w3l-footer-29-main-->
-    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_FooterPartialview.cshtml")
-    <!--/w3l-footer-29-main-->
-    <!-- Template JavaScript -->
-    @await Html.PartialAsync("~/Views/Shared/LayoutPartial/_ScriptPartial.cshtml")
-    <!-- Template JavaScript -->
+    @await Html.PartialAsync("/Views/Shared/LayoutPartial/_HeaderPartialview.cshtml")
+    @RenderBody()
+    @await Html.PartialAsync("/Views/Shared/LayoutPartial/_FooterPartialview.cshtml")
+    @await Html.PartialAsync("/Views/Shared/LayoutPartial/_ScriptPartial.cshtml")
 </body>
-
 </html>

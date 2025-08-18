@@ -31,6 +31,8 @@ namespace EntityLayer.Concrate
         public string Image2{ get; set; }
         public string Image3{ get; set; }
        public List<Comment> Comments { get; set; }
+        public List<Reservition>  reservitions{ get; set; }
+        public int GuideId { get; set; }
 
 
     }

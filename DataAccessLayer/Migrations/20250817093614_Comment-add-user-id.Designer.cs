@@ -4,6 +4,7 @@ using DataAccessLayer.Concrate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250817093614_Comment-add-user-id")]
+    partial class Commentadduserid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,9 +207,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -356,60 +355,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("newsletters");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrate.Reservition", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<int?>("DestinitonDestinationID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Destintionid")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GuideGuidID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Guidid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HowmanyPapel")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReservDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ReservEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ReservStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Userid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("DestinitonDestinationID");
-
-                    b.HasIndex("GuideGuidID");
-
-                    b.HasIndex("Userid");
-
-                    b.ToTable("reservitions");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrate.Roll", b =>
                 {
                     b.Property<int>("Id")
@@ -511,12 +456,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("GuideGuidID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Guidid")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -567,8 +506,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GuideGuidID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -693,30 +630,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrate.Reservition", b =>
-                {
-                    b.HasOne("EntityLayer.Concrate.Destiniton", null)
-                        .WithMany("reservitions")
-                        .HasForeignKey("DestinitonDestinationID");
-
-                    b.HasOne("EntityLayer.Concrate.Guide", null)
-                        .WithMany("reservitions")
-                        .HasForeignKey("GuideGuidID");
-
-                    b.HasOne("EntityLayer.Concrate.User", null)
-                        .WithMany("reservitions")
-                        .HasForeignKey("Userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrate.User", b =>
-                {
-                    b.HasOne("EntityLayer.Concrate.Guide", null)
-                        .WithMany("UserCostumer")
-                        .HasForeignKey("GuideGuidID");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("EntityLayer.Concrate.Roll", null)
@@ -771,20 +684,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrate.Destiniton", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("reservitions");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrate.Guide", b =>
-                {
-                    b.Navigation("UserCostumer");
-
-                    b.Navigation("reservitions");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrate.User", b =>
-                {
-                    b.Navigation("reservitions");
                 });
 #pragma warning restore 612, 618
         }

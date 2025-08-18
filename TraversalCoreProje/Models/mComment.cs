@@ -4,12 +4,9 @@ namespace TraversalCoreProje.Models
 {
     public class mComment
     {
-       
-        public string CommentUser { get; set; }
-        
-        public string CommentContent { get; set; }
 
-        public int Destiniton { get; set; }
-       
+        public string CommentUser { get; set; }
+        public string CommentContent { get; set; }
+        public int DestinationId { get; set; }
     }
 }

@@ -27,5 +27,6 @@ namespace DataAccessLayer.Concrate
         public DbSet<SubAbout> subabouts { get; set; }
         public DbSet<Testimonial> testsimonials { get; set; }
         public DbSet<Comment> comments { get; set; }
+        public DbSet<Reservition> reservitions { get; set;}
     }
 }

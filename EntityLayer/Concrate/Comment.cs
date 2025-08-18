@@ -10,6 +10,7 @@ namespace EntityLayer.Concrate
     public class Comment
     {
         public int id { get; set; }
+        public int Userid { get; set; }
         public string CommentUser { get; set; }
         public string CommentContent { get; set; }
         public bool status { get; set; }

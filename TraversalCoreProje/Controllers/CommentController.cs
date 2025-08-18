@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProje.Models;
 
@@ -11,37 +12,56 @@ namespace TraversalCoreProje.Controllers
     {
         Context _context = new Context();
         CommentManager Bll = new CommentManager(new EfCommentDAL());
+        
+        private readonly UserManager<User> _usermanager;
+
+        public CommentController(UserManager<User> usermanager)
+        {
+            _usermanager = usermanager;
+        }
+
         [HttpGet]
         public IActionResult AddComment()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddComment([FromBody] mComment c)
+        public async Task<IActionResult> AddComment([FromBody] mComment c)
         {
-            var c1 = new EntityLayer.Concrate.Comment
+            var userr = await _usermanager.GetUserAsync(HttpContext.User);
+            if (userr != null)
             {
-                CommentData = DateTime.Now,
-                status = true,
-                CommentContent = c.CommentContent,
-                CommentUser = c.CommentUser,
-                Destinitonid = c.Destiniton,
-            };
 
-
-            Bll.Insert(c1);
-            return Json(new
-            {
-                success = true,
-                comment = new
+                var c1 = new EntityLayer.Concrate.Comment
                 {
-                    name = c1.CommentUser,
-                    content = c1.CommentContent,
-                    date = c1.CommentData.ToLongDateString()
-                }
-            });
+                    CommentData = DateTime.Now,
+                    status = true,
+                    CommentContent = c.CommentContent,
+                    CommentUser = userr.Name+ "" + userr.Surname,
+                    Destinitonid = c.DestinationId,
+                    Userid= userr.Id
+                };
 
-         
+                
+
+                Bll.Insert(c1);
+                return Json(new
+                {
+                    success = true,
+                    comment = new
+                    {
+                        name = c1.CommentUser,
+                        content = c1.CommentContent,
+                        date = c1.CommentData.ToLongDateString()
+                    }
+                });
+            }
+            else
+            {
+                return View(c);
+            }
+
+
         }
 
     }

@@ -8,6 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reise-Website - Registrieren</title>
     <link href="~/Data/Css/Registorstyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body class="bg-white min-h-screen">
@@ -20,26 +27,22 @@
                 </a>
             </div>
         </div>
-
         <!-- Sağ Taraf - Kayıt Formu -->
-        <div class="flex-1 flex items-center justify-center p-8 bg-gray-500">
-            <div class="w-full max-w-sm">
-
-
+        <div class="flex-1 flex items-center justify-center p-10 bg-gray-500">
+            <div class="w-full " style="width:50%;">
                 <!-- Kayıt Formu -->
                 <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
                     <h2 class="text-2xl font-semibold text-black mb-6 text-center">Konto erstellen</h2>
-
-                    <form method="post" id="registerForm" class="space-y-4" action="/User/registor">
+                    <form method="post" id="registerForm" class="space-y-4" action="/User/registor" enctype="multipart/form-data">
                         <!-- Vollständiger Name -->
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-2">VorName</label>
-                            <input type="text" id="name" asp-for=Name  class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Ihr Vorname">
+                            <input type="text" id="name" asp-for=Name class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Ihr Vorname">
                             <span asp-validation-for="Name" style="color:red" class="text-danger sp"></span>
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-2">NachName</label>
-                            <input type="text" id="surname" asp-for="Surname"  class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Ihr Nachname">
+                            <input type="text" id="surname" asp-for="Surname" class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Ihr Nachname">
                             <span asp-validation-for="Surname" style="color:red" class="text-danger sp"></span>
                         </div>
                         <!-- E-Mail -->
@@ -48,28 +51,43 @@
                             <input type="email" id="email" asp-for="Email" class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="beispiel@email.com">
                             <span asp-validation-for="Email" style="color:red" class="text-danger sp"></span>
                         </div>
-
                         <!-- Telefon -->
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-2">Telefon</label>
                             <input type="tel" id="phone" asp-for="Telefonno" minlength="11" required class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="0155 123 45 67">
                             <span asp-validation-for="Telefonno" style="color:red" class="text-danger sp"></span>
                         </div>
-
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Bitte wählen Sie ihr Geschlescht</label>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for=Gender required>
+                                        <option value="Women">Women</option>
+                                        <option value="Man">Man</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="Gender" class="text-danger sp" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Bitte wählen Sie ihrs Photo</label>
+                            <div class="form-group">
+                                <input type="file" asp-for="imagefile" class="form-control"> 
+                            </div>
+                            <span asp-validation-for="imagefile" class="text-danger sp" style="color:red"></span>
+                        </div>
                         <!-- Passwort -->
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-2">Passwort</label>
                             <input type="password" id="password" minlength="6" asp-for="Password" required class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Mindestens 6 Zeichen">
                             <span asp-validation-for="Password" style="color:red" class="text-danger sp"></span>
                         </div>
-
                         <!-- Passwort wiederholen -->
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-2">Passwort wiederholen</label>
                             <input type="password" id="confirmPassword" minlength="6" asp-for="PasswordConfirm" required class="input-focus w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:border-black transition-all duration-300" placeholder="Passwort erneut eingeben">
-                            <span asp-validation-for="PasswordConfirm"  class="text-danger sp" style="color:red"></span>
+                            <span asp-validation-for="PasswordConfirm" class="text-danger sp" style="color:red"></span>
                         </div>
-
                         <!-- Vertragszustimmung -->
                         <div class="flex items-start space-x-3">
                             <input type="checkbox" id="terms" required="" class="mt-1 w-4 h-4 text-black bg-white border-gray-300 rounded focus:ring-gray-500">
@@ -80,11 +98,10 @@
                         </div>
                         <div style="color:red" asp-validation-summary="ModelOnly">  </div>
                         <!-- Registrierungsbutton -->
-                        <button  class="w-full bg-black text-white font-semibold py-3 px-6 rounded-xl hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <button class="w-full bg-black text-white font-semibold py-3 px-6 rounded-xl hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg">
                             Konto erstellen
                         </button>
                     </form>
-
                     <!-- Anmelde-Link -->
                     <div class="mt-6 text-center">
                         <p class="text-gray-600 text-sm">
@@ -94,29 +111,26 @@
                             </a>
                         </p>
                     </div>
-
                     <!-- Social Media Registrierung -->
-                 @*   <div class="mt-6">
-                        <div class="relative">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-gray-300"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span class="px-2 bg-white text-gray-600">oder</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 grid grid-cols-2 gap-3">
-                            <button class="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-black hover:bg-gray-100 transition-all duration-300">
-                                Google
-                            </button>
-                            <button class="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-black hover:bg-gray-100 transition-all duration-300">
-                                Facebook
-                            </button>
-                        </div>
+                    @*   <div class="mt-6">
+                    <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-600">oder</span>
+                    </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                    <button class="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-black hover:bg-gray-100 transition-all duration-300">
+                    Google
+                    </button>
+                    <button class="flex justify-center items-center px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-black hover:bg-gray-100 transition-all duration-300">
+                    Facebook
+                    </button>
+                    </div>
                     </div>*@
                 </div>
-
                 <!-- Fußzeile -->
                 <div class="text-center mt-6">
                     <p class="text-gray-500 text-xs">
@@ -127,22 +141,27 @@
         </div>
     </div>
 
-  
+
     <script>
-        (function () 
-        { function c()  { 
+        (function () {
+            function c() {
                 var b = a.contentDocument || a.contentWindow.document;
-                if (b)
-                { var d = b.createElement('script');
-                d.innerHTML = "window.__CF$cv$params={r:'96b622fd8297d29c',t:'MTc1NDU2MzAyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-                b.getElementsByTagName('head')[0].appendChild(d) 
-                } }
-                if (document.body) 
-                { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); 
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML = "window.__CF$cv$params={r:'96b622fd8297d29c',t:'MTc1NDU2MzAyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d)
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a);
                 if ('loading' !== document.readyState) c();
                 else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
-                else { var e = document.onreadystatechange || function () { };
-                document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();
+                else {
+                    var e = document.onreadystatechange || function () { };
+                    document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) }
+                }
+            }
+        })();
     </script>
     <iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
 
