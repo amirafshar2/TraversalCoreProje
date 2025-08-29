@@ -9,7 +9,7 @@
 
 <!-- index.html  21 Nov 2019 03:44:50 GMT -->
 <head>
-    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_HeadlinkPartial.cshtml")
+    @await Html.PartialAsync("~/Views/_UserLayoutPartial/_HeadlinkPartial.cshtml")
 </head>
 
 <body>
@@ -41,11 +41,11 @@
                         </li>
                     </ul>
                 </div>
-                @await Html.PartialAsync("/Areas/Member/Views/_UserLayoutPartial/_NavbarPartial.cshtml")
+                @await Html.PartialAsync("~/Views/_UserLayoutPartial/_NavbarPartial.cshtml")
             </nav>
             <div class="main-sidebar sidebar-style-2">
                 <!-- Es gibt Logo auch in dise Partialview -->
-               @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_SidbarPartial.cshtml")
+               @await Html.PartialAsync("~/Views/_UserLayoutPartial/_SidbarPartial.cshtml")
             </div>
             <!-- Main Content -->
             <div class="main-content">
@@ -53,7 +53,7 @@
                     @RenderBody()
                 </section>
                 <div class="settingSidebar">
-                    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_SettingsidebarPartial.cshtml")
+                    @await Html.PartialAsync("~/Views/_UserLayoutPartial/_SettingsidebarPartial.cshtml")
                 </div>
             </div>
             <footer class="main-footer">
@@ -66,7 +66,7 @@
         </div>
     </div>
     <!-- General JS Scripts -->
-    @await Html.PartialAsync("~/Areas/Member/Views/_UserLayoutPartial/_ScriptPartial.cshtml")
+    @await Html.PartialAsync("~/Views/_UserLayoutPartial/_ScriptPartial.cshtml")
 </body>
 
 

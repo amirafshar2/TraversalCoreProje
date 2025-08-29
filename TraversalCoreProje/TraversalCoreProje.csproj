@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Member\Data\**" />
     <Compile Remove="wwwroot\images\**" />
+    <Content Remove="Areas\Member\Data\**" />
     <Content Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="Areas\Member\Data\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
+    <None Remove="Areas\Member\Data\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
@@ -29,6 +33,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="10.5.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Member\Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Member\Views\Shared\" />
     <Folder Include="wwwroot\Data\Script\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />

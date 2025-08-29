@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Migrations;
 using EntityLayer.Concrate;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,27 @@ namespace BusinessLayer.Concrate
 
         public List<Reservition> GetAll()
         {
-           return _Dal.GetList();
+            return _Dal.GetList();
         }
 
         public Reservition GetById(int id)
         {
-            throw new NotImplementedException();
+            return _Dal.Get(id);
         }
 
         public List<Reservition> GetlistByuserid(int userid)
         {
-            return _Dal.GetlistbyUserId(userid);
+            return  _Dal.GetlistbyUserId(userid).Where(x=>x.status == "Ihre Genehmigung ist ausstehend.").ToList();
+        }
+
+        public List<Reservition> GetlistByuseridaccept(int userid)
+        {
+            return _Dal.GetlistbyUserId(userid).Where(x=>x.status == "Die Buchung ist bestätigt.").ToList();
+        }
+
+        public List<Reservition> GetlistByuseridcanceld(int userid)
+        {           
+            return _Dal.GetlistbyUserId(userid).Where(x=> x.status == "Storniert").ToList();
         }
 
         public void Insert(Reservition entity)
@@ -45,7 +56,7 @@ namespace BusinessLayer.Concrate
 
         public void Update(Reservition entity)
         {
-            throw new NotImplementedException();
+            _Dal.Updater(entity);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IReservationService : IGenerik_Service<Reservition>
     {
         public List<Reservition> GetlistByuserid(int userid);
+        public List<Reservition> GetlistByuseridcanceld(int userid);
+        public List<Reservition> GetlistByuseridaccept(int userid);
     }
 }

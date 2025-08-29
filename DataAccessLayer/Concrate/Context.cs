@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrate
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=.;database=TraversalDB;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=TraversalDB;Integrated Security=True;");
         }
         public DbSet<About> abouts { get; set; }
         public DbSet<About2> abouts2 { get; set; }

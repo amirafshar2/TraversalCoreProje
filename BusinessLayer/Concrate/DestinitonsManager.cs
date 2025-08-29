@@ -20,15 +20,12 @@ namespace BusinessLayer.Concrate
 
         public void Delete(Destiniton entity)
         {
-            throw new NotImplementedException();
+            _ıDestinationDal.Delete(entity);
         }
 
         public List<Destiniton> GetAll()
         {
-            var q = _ıDestinationDal.GetList();
-            List<Destiniton> list = new List<Destiniton>();
-            list.AddRange(q.Where(e=>e.Status== true));
-            return list;
+            return  _ıDestinationDal.GetList();   
         }
 
         public Destiniton GetById(int id)
@@ -38,12 +35,12 @@ namespace BusinessLayer.Concrate
 
         public void Insert(Destiniton entity)
         {
-            throw new NotImplementedException();
+            _ıDestinationDal.Insert(entity);
         }
 
         public void Update(Destiniton entity)
         {
-            throw new NotImplementedException();
+            _ıDestinationDal.Updater(entity);
         }
     }
 }

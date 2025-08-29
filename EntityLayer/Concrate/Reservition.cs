@@ -14,6 +14,7 @@ namespace EntityLayer.Concrate
         public int Userid { get; set; }
         public string Username { get; set; }
         public int Destintionid { get; set; }
+        public Destiniton Destiniton { get; set; }
         public DateTime ReservDate { get; set; }
         public DateTime ReservStart  { get; set; }
         public DateTime ReservEnd  { get; set; }

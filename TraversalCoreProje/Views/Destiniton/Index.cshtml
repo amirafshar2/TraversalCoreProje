@@ -15,6 +15,14 @@
     </div>
 </section>
 <!-- //about breadcrumb -->
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container p-3 " style="height: 30px;">
+        @await Html.PartialAsync("/Views/Shared/MemberPartial/_MemberReservationGrupBtn.cshtml")
+    </div>    // işlem yap
+}
+
+
 <!--  Work gallery section -->
 <section class="grids-1 py-5">
     <div class="grids py-lg-5 py-md-4">
@@ -25,7 +33,7 @@
                 {
                     <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
                         <div class="column">
-                            <a href="@Url.Action("Destiniton","Destiniton",new {id = item.DestinationID})"><img src="@item.Image" alt="" class="img-fluid"></a>
+                            <a href="@Url.Action("Destiniton", "Destiniton", new { id = item.DestinationID })"><img src="@item.Image" alt="" class="img-fluid"></a>
                             <div class="info">
                                 <h4><a href="">@item.City</a></h4>
                                 <p>@item.DayNight</p>

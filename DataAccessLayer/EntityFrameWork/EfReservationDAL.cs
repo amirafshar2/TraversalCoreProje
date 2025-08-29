@@ -2,6 +2,7 @@
 using DataAccessLayer.Migrations;
 using DataAccessLayer.Repository;
 using EntityLayer.Concrate;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,8 @@ namespace DataAccessLayer.EntityFrameWork
         DataAccessLayer.Concrate.Context db = new DataAccessLayer.Concrate.Context();
         public List<Reservition> GetlistbyUserId(int userId)
         {
-            List<Reservition> list = new List<Reservition>();
-            var q = db.reservitions.Where(x => x.Userid == userId);
-            if (q.Count() > 0)
-            {
-                foreach (var item in q)
-                { list.Add(item); }
-            }
-            return list;
+            
+            return db.reservitions.Where(x => x.Userid == userId).Include(y => y.Destiniton).ToList();
         }
     }
 }

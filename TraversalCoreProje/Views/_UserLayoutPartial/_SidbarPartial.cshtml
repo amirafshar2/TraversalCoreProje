@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href="index.html">
+            <span class="logo-name">Traversal</span>
+        </a>
+
+    </div>
+    <ul class="sidebar-menu">
+        <li class="menu-header">Main</li>
+        <li class="dropdown active">
+            <a href="~/otika-bootstrap-admin-template/index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="briefcase"></i><span>Reservation</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="nav-link" href="@Url.Action("GetReservations", "Reservation", new { area = "Member" })">
+                        Ausstehende
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="@Url.Action("AcceptedReservations", "Reservation", new { area = "Member" })">
+                        bestätigte
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="@Url.Action("CanceledReservations", "Reservation", new { area = "Member" })">
+                        stornierte
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="@Url.Action("Index", "Destiniton", new { area = "Default" })">
+                        Neue
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</aside>
