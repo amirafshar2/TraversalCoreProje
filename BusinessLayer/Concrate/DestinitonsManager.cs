@@ -33,6 +33,11 @@ namespace BusinessLayer.Concrate
           return _ıDestinationDal.Get(id);
         }
 
+        public List<Destiniton> GetWhitTourlider()
+        {
+            return _ıDestinationDal.GetallWhitTourlider();
+        }
+
         public void Insert(Destiniton entity)
         {
             _ıDestinationDal.Insert(entity);

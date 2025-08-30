@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,18 +23,18 @@ namespace EntityLayer.Concrate
         public string Title1 { get; set; }
         public string Detail1 { get; set; }
         public string Detail2 { get; set; }
-        public string Detail3{ get; set; }
+        public string Detail3 { get; set; }
         public string Title3 { get; set; }
-        public string Detail4{ get; set; }
+        public string Detail4 { get; set; }
         public string Title4 { get; set; }
         public string Detail5 { get; set; }
         public string Title5 { get; set; }
-        public string Image2{ get; set; }
-        public string Image3{ get; set; }
-       public List<Comment> Comments { get; set; }
-        public List<Reservition>  reservitions{ get; set; }
-        public int GuideId { get; set; }
-
+        public string Image2 { get; set; }
+        public string Image3 { get; set; }
+        public List<Comment> Comments { get; set; }
+        public List<Reservition> reservitions { get; set; }
+        public int Turlider { get; set; }
+        
 
     }
 }

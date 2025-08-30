@@ -22,7 +22,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             {
 
                 var user = await _usermanager.GetUserAsync(HttpContext.User);
-
+                
                 UserModel u = new UserModel()
                 {
                     email = user.Email,

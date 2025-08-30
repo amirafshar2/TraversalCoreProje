@@ -205,9 +205,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -241,6 +238,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Title5")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Turlider")
+                        .HasColumnType("int");
 
                     b.HasKey("DestinationID");
 
@@ -303,42 +303,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("features2");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrate.Guide", b =>
-                {
-                    b.Property<int>("GuidID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GuidID"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InstgramUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TwiterUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("GuidID");
-
-                    b.ToTable("guides");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrate.Newsletter", b =>
                 {
                     b.Property<int>("NewsletterID")
@@ -370,9 +334,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Destintionid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GuideGuidID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Guidid")
                         .HasColumnType("int");
 
@@ -402,8 +363,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("id");
 
                     b.HasIndex("DestinitonDestinationID");
-
-                    b.HasIndex("GuideGuidID");
 
                     b.HasIndex("Userid");
 
@@ -511,12 +470,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("GuideGuidID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Guidid")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -567,8 +520,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GuideGuidID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -701,10 +652,6 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EntityLayer.Concrate.Guide", null)
-                        .WithMany("reservitions")
-                        .HasForeignKey("GuideGuidID");
-
                     b.HasOne("EntityLayer.Concrate.User", null)
                         .WithMany("reservitions")
                         .HasForeignKey("Userid")
@@ -712,13 +659,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Destiniton");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrate.User", b =>
-                {
-                    b.HasOne("EntityLayer.Concrate.Guide", null)
-                        .WithMany("UserCostumer")
-                        .HasForeignKey("GuideGuidID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -775,13 +715,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrate.Destiniton", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("reservitions");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrate.Guide", b =>
-                {
-                    b.Navigation("UserCostumer");
 
                     b.Navigation("reservitions");
                 });

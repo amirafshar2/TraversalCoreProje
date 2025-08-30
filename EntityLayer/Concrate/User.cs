@@ -14,8 +14,8 @@ namespace EntityLayer.Concrate
         public string Surname { get; set; }
         public string gender { get; set; }
         public List<Reservition> reservitions { get; set; }
-        public int Guidid { get; set; }
-        
+       
+
 
     }
 }

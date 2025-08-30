@@ -37,7 +37,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             {
                 ViewBag.dencity = dest.City;
                 ViewBag.desid = dest.DestinationID;
-                ViewBag.guidid = dest.GuideId;
+                //ViewBag.guidid = dest.GuideId;
             }
             return View();
         }

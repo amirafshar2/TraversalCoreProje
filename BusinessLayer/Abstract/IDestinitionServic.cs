@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IDestinitionServic:IGenerik_Service<Destiniton>
     {
+        public List<Destiniton> GetWhitTourlider();
     }
 }

@@ -10,7 +10,7 @@ namespace TraversalCoreProje.ViewComponents.Default
         public IViewComponentResult Invoke ()
         {
             ViewBag.DestinitionsCount = context.destinitons.Count();
-            ViewBag.GuideCount = context.guides.Count();
+            //ViewBag.GuideCount = context.guides.Count();
             ViewBag.Costumer = "285";
             return View();
         }

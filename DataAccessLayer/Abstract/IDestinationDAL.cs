@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IDestinationDAL :IGenerikDAL<Destiniton>
     {
+        public List<Destiniton> GetallWhitTourlider();
     }
 }
