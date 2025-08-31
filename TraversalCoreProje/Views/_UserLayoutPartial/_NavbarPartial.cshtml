@@ -1,8 +1,24 @@
-﻿
+﻿<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <ul class="navbar-nav navbar-right">
+    <li class="dropdown dropdown-list-toggle">
+        <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown"
+             style="height: 775px; width: 442px;"
+             onclick="event.stopPropagation();">
+            <div class="dropdown-list-content dropdown-list-icons"
+                 style="width: 440px; height: 768px; margin: 0px -30px 0px 0px;">
+                @await Component.InvokeAsync("_AIpartial")
+            </div>
+        </div>
+        <a href="#" data-toggle="dropdown"
+           class="nav-link notification-toggle nav-link-lg">
+            <span class="material-symbols-outlined" style="color: #495057; font-size: 24px;">
+                auto_awesome
+            </span>
+        </a>
+    </li>
     <li class="dropdown dropdown-list-toggle">
         <a href="#" data-toggle="dropdown"
            class="nav-link nav-link-lg message-toggle">
@@ -97,77 +113,6 @@
                             Smith
                         </span> <span class="time messege-text">Client Requirements</span>
                         <span class="time">2 Days Ago</span>
-                    </span>
-                </a>
-            </div>
-            <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-            </div>
-        </div>
-    </li>
-    <li class="dropdown dropdown-list-toggle">
-        <a href="#" data-toggle="dropdown"
-           class="nav-link notification-toggle nav-link-lg">
-            <i data-feather="bell" class="bell"></i>
-        </a>
-        <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-            <div class="dropdown-header">
-                Notifications
-                <div class="float-right">
-                    <a href="#">Mark All As Read</a>
-                </div>
-            </div>
-            <div class="dropdown-list-content dropdown-list-icons">
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                    <span class="dropdown-item-icon bg-primary text-white">
-                        <i class="fas
-												fa-code"></i>
-                    </span> <span class="dropdown-item-desc">
-                        Template update is
-                        available now! <span class="time">
-                            2 Min
-                            Ago
-                        </span>
-                    </span>
-                </a> <a href="#" class="dropdown-item">
-                    <span class="dropdown-item-icon bg-info text-white">
-                        <i class="far
-												fa-user"></i>
-                    </span> <span class="dropdown-item-desc">
-                        <b>You</b> and <b>
-                            Dedik
-                            Sugiharto
-                        </b> are now friends <span class="time">
-                            10 Hours
-                            Ago
-                        </span>
-                    </span>
-                </a> <a href="#" class="dropdown-item">
-                    <span class="dropdown-item-icon bg-success text-white">
-                        <i class="fas
-												fa-check"></i>
-                    </span> <span class="dropdown-item-desc">
-                        <b>Kusnaedi</b> has
-                        moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">
-                            12
-                            Hours
-                            Ago
-                        </span>
-                    </span>
-                </a> <a href="#" class="dropdown-item">
-                    <span class="dropdown-item-icon bg-danger text-white">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </span> <span class="dropdown-item-desc">
-                        Low disk space. Let's
-                        clean it! <span class="time">17 Hours Ago</span>
-                    </span>
-                </a> <a href="#" class="dropdown-item">
-                    <span class="dropdown-item-icon bg-info text-white">
-                        <i class="fas
-												fa-bell"></i>
-                    </span> <span class="dropdown-item-desc">
-                        Welcome to Otika
-                        template! <span class="time">Yesterday</span>
                     </span>
                 </a>
             </div>
