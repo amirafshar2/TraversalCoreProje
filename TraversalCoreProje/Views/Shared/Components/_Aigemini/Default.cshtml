@@ -1,0 +1,90 @@
+﻿@model TraversalCoreProje.Models.PicMethods.AI.ChatViewModel
+
+<div class="card shadow-lg border-0 h-100 d-flex flex-column">
+    <div class="card-header bg-primary text-white text-center py-3">
+        <h5 class="mb-0">Traversal AI Asistanı</h5>
+    </div>
+
+    <div class="card-body overflow-auto flex-grow-1" style="height: 400px;" id="chatHistory">
+        <div class="d-flex justify-content-center align-items-center h-100 text-muted">
+            <p>Bir şehir veya bölge adı yazarak tura başla! 🌍</p>
+        </div>
+    </div>
+
+    <div class="card-footer bg-light border-top p-3">
+        <form id="chatForm">
+            <div class="input-group">
+                <input type="text" id="messageInput" class="form-control rounded-pill border-0 shadow-sm" placeholder="Şehir veya bölge giriniz..." required />
+                <button type="submit" class="btn btn-primary rounded-pill ms-2">Gönder</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Sohbet verisini tarayıcı belleğinde tutan değişken
+        let chatData = { messages: [] };
+
+        // Form gönderimini yakala
+        $('#chatForm').on('submit', function (e) {
+            e.preventDefault();
+
+            const userMessage = $('#messageInput').val();
+            if (!userMessage.trim()) return;
+
+            // Kullanıcı mesajını yerel veriye ekle ve ekrana yaz
+            chatData.messages.push({ sender: 'User', text: userMessage });
+            appendMessage('User', userMessage);
+            $('#messageInput').val('');
+            scrollToBottom();
+
+            // Sohbet geçmişini API'ye gönder
+            $.ajax({
+                type: 'POST',
+                url: '/Ai/Chat',
+                contentType: 'application/json',
+                data: JSON.stringify(chatData),
+                success: function(responseModel) {
+                    // API'den gelen veriyi yerel veriye ekle ve ekrana yaz
+                    chatData.messages.push(responseModel.messages[responseModel.messages.length - 1]);
+
+                    const aiMessage = responseModel.messages[responseModel.messages.length - 1];
+                    appendMessage('AI', aiMessage.text);
+                    scrollToBottom();
+                },
+                error: function(xhr, status, error) {
+                    appendMessage('AI', `Üzgünüm, bir hata oluştu. Detay: ${xhr.status} (${xhr.statusText})`);
+                    scrollToBottom();
+                }
+            });
+        });
+
+        // Mesajları ekrana ekleyen yardımcı fonksiyon
+        function appendMessage(sender, text) {
+            // Başlangıç metnini kaldır
+            if ($('#chatHistory').children().hasClass('h-100')) {
+                $('#chatHistory').html('');
+            }
+
+            const messageClass = sender === 'User' ? 'justify-content-end' : 'justify-content-start';
+            const bubbleClass = sender === 'User' ? 'bg-primary text-white' : 'bg-light border';
+
+            const messageHtml = `
+                <div class="d-flex mb-3 ${messageClass}">
+                    <div class="p-3 rounded-3 ${bubbleClass}" style="max-width: 70%; word-wrap: break-word;">
+                        ${text.replace(/\n/g, '<br>')}
+                    </div>
+                </div>`;
+
+            $('#chatHistory').append(messageHtml);
+        }
+
+        // Otomatik aşağı kaydırma
+        function scrollToBottom() {
+            const chatHistory = $('#chatHistory');
+            chatHistory.scrollTop(chatHistory.prop('scrollHeight'));
+        }
+    });
+</script>
