@@ -5,14 +5,17 @@ using EntityLayer.Concrate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProje.Areas.Admin.Models;
+using TraversalCoreProje.Areas.Admin.Mthods;
 using TraversalCoreProje.Models.PicMethods;
 using X.PagedList.Extensions;
+
 
 namespace TraversalCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class DestinationController : Controller
     {
+        EntityTauchen _entity = new EntityTauchen();
         DestinitonsManager _Bll = new DestinitonsManager(new EfDestinitionDAL());
         PicSave _pic = new PicSave();
         Context db = new Context();
@@ -52,7 +55,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
                     p.Image3 = await _pic.SaveFileAsync(p.image3);         // zorunlu
 
                     // Entity dönüşümü
-                    Destiniton d = DestinationModelToDestiniton(p);
+                    Destiniton d = _entity.DestinationModelToDestiniton(p);
                     d.DestinationID = 0;
                     d.Turlider = u.Id;
                     _Bll.Insert(d);
@@ -88,7 +91,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
                 foreach (var item in q)
                 {
                     var user = db.Users.Find(item.Turlider);
-                    DestinationModel qe = DestinitonToDestinationModel(item);
+                    DestinationModel qe = _entity.DestinitonToDestinationModel(item);
                     qe.username = user.Name;
                     qe.usersurname = user.Surname;
                     qe.userimage = user.Image;
@@ -107,7 +110,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var q = _Bll.GetById(id);
-            var model = DestinitonToDestinationModel(q);
+            var model = _entity.DestinitonToDestinationModel(q);
             ViewBag.id = id;
             return View(model);
         }
@@ -132,7 +135,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
                 {
                     p.Image3 = await _pic.SaveFileAsync(p.image3);
                 }
-                var q = DestinationModelToDestiniton(p);
+                var q = _entity.DestinationModelToDestiniton(p);
                 var dest = _Bll.GetById(p.DestinationID);
                 dest.City = q.City;
                 dest.DayNight = q.DayNight;
@@ -191,63 +194,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         }
         #endregion
 
-        #region entity dönüşümü
-        public Destiniton DestinationModelToDestiniton(DestinationModel p)
-        {
-
-            return new Destiniton
-            {
-                DestinationID = p.DestinationID,
-                City = p.City,
-                DayNight = p.DayNight,
-                Price = p.Price,
-                Capacity = p.Capacity,
-                Image = p.Image,          // opsiyonel olabilir
-                CoverImage = p.CoverImage,
-                Image2 = p.Image2,
-                Image3 = p.Image3,
-                Description = p.Description,
-                Status = true,
-                Detail1 = p.Detail1,
-                Detail2 = p.Detail2,
-                Detail3 = p.Detail3,
-                Detail4 = p.Detail4,
-                Detail5 = p.Detail5,
-                Title1 = p.Title1,
-                Title3 = p.Title3,
-                Title4 = p.Title4,
-                Title5 = p.Title5,
-
-            };
-        }
-        public DestinationModel DestinitonToDestinationModel(Destiniton d)
-        {
-            return new DestinationModel
-            {
-
-                City = d.City,
-                DayNight = d.DayNight,
-                Price = d.Price,
-                Capacity = d.Capacity,
-                Image = d.Image,          // opsiyonel olabilir
-                CoverImage = d.CoverImage,
-                Image2 = d.Image2,
-                Image3 = d.Image3,
-                Description = d.Description,
-                Status = d.Status,
-                Detail1 = d.Detail1,
-                Detail2 = d.Detail2,
-                Detail3 = d.Detail3,
-                Detail4 = d.Detail4,
-                Detail5 = d.Detail5,
-                Title1 = d.Title1,
-                Title3 = d.Title3,
-                Title4 = d.Title4,
-                Title5 = d.Title5,
-                turliderid = d.Turlider,
-            };
-        }
-        #endregion
+       
     }
 
 }

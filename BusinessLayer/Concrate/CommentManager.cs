@@ -21,12 +21,15 @@ namespace BusinessLayer.Concrate
 
         public void Delete(Comment entity)
         {
-            throw new NotImplementedException();
+            _icommentdal.Delete(entity);
         }
 
         public List<Comment> GetAll()
         {
-            throw new NotImplementedException();
+            return _icommentdal.GetList()
+                .Where(x => x.status == true)
+                .OrderByDescending(x => x.CommentData)
+                .ToList();
         }
 
         public Comment GetById(int id)
