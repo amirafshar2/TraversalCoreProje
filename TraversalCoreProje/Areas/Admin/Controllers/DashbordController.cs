@@ -19,5 +19,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             ViewBag.reservation = reservation;
             return View();
         }
+      
+
     }
 }

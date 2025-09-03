@@ -49,6 +49,11 @@ namespace BusinessLayer.Concrate
             return _Dal.GetlistbyUserId(userid).Where(x=> x.status == "Storniert").ToList();
         }
 
+        public List<Reservition> GetListWhitDestination()
+        {
+            return _Dal.Getlistwhitdesetination();
+        }
+
         public void Insert(Reservition entity)
         {
             _Dal.Insert(entity);

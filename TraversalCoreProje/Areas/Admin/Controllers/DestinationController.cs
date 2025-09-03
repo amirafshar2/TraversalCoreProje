@@ -111,7 +111,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         {
             var q = _Bll.GetById(id);
             var model = _entity.DestinitonToDestinationModel(q);
-            ViewBag.id = id;
+            ViewBag.id = id.ToString();
             return View(model);
         }
         [HttpPost]

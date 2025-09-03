@@ -19,5 +19,10 @@ namespace DataAccessLayer.EntityFrameWork
             
             return db.reservitions.Where(x => x.Userid == userId).Include(y => y.Destiniton).ToList();
         }
+
+        public List<Reservition> Getlistwhitdesetination()
+        {
+            return db.reservitions.Include(x => x.Destiniton).ToList();
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IReservationDal: IGenerikDAL<Reservition>
     {
         public List<Reservition> GetlistbyUserId(int userId);
+        public List<Reservition> Getlistwhitdesetination();
     }
 }
