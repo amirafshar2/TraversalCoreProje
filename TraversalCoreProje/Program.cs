@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.EntityFrameWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +23,12 @@ builder.Services.AddIdentity<User, Roll>(options =>
 })
 .AddEntityFrameworkStores<Context>()
 .AddDefaultTokenProviders();
-
+builder.Services.AddScoped<IDestinitionServic,DestinitonsManager>();
+builder.Services.AddScoped<IDestinationDAL,EfDestinitionDAL>();
+builder.Services.AddScoped<ICommentService,CommentManager>();
+builder.Services.AddScoped<ICommentDAL,EfCommentDAL>();
+builder.Services.AddScoped<IUserService,UserManager>();
+builder.Services.AddScoped<IUserDAL,EfUserDAL>();
 // Session cookie ayarý (tarayýcý kapandýðýnda logout olacak)
 builder.Services.ConfigureApplicationCookie(options =>
 {

@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
@@ -15,15 +16,18 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
     [Area("Admin")]
     public class DestinationController : Controller
     {
-        EntityTauchen _entity = new EntityTauchen();
-        DestinitonsManager _Bll = new DestinitonsManager(new EfDestinitionDAL());
-        PicSave _pic = new PicSave();
-        Context db = new Context();
+        #region Dependencies and Constructor
+        private readonly IDestinitionServic _Bll;
         private readonly UserManager<EntityLayer.Concrate.User> _usermanager;
-        public DestinationController(UserManager<EntityLayer.Concrate.User> usermanager)
+        EntityTauchen _entity = new EntityTauchen();// entity dönüşümü için bir method 
+        PicSave _pic = new PicSave();// resim kaydetme methodu
+        public DestinationController(IDestinitionServic bll, UserManager<User> usermanager)
         {
+            _Bll = bll;
             _usermanager = usermanager;
         }
+        #endregion
+       
         #region GeminiAI
 
         #endregion
@@ -90,11 +94,11 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
                 List<DestinationModel> dess = new List<DestinationModel>();
                 foreach (var item in q)
                 {
-                    var user = db.Users.Find(item.Turlider);
+                    var user = await _usermanager.FindByIdAsync(item.Turlider.ToString());
                     DestinationModel qe = _entity.DestinitonToDestinationModel(item);
-                    qe.username = user.Name;
-                    qe.usersurname = user.Surname;
-                    qe.userimage = user.Image;
+                    qe.username = user?.Name;
+                    qe.usersurname = user?.Surname;
+                    qe.userimage = user?.Image;
                     qe.DestinationID = item.DestinationID;
                     dess.Add(qe);
                 }

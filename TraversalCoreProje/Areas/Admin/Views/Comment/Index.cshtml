@@ -1,0 +1,139 @@
+﻿@model X.PagedList.IPagedList<TraversalCoreProje.Areas.Admin.Models.CommentWhitUserModel>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+@if (Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Comments</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                        @foreach (var item in Model.Take(4))
+                        {
+                            <li class="media">
+                                <img alt="image" class="mr-3 rounded-circle" width="70" src="@item.UserImage">
+                                <div class="media-body">
+                                    <div class="media-right">
+                                        @if (item.status)
+                                        {
+                                            <div class="text-success">aktiv</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-warning">deaktiv</div>
+                                        }
+                                    </div>
+                                    <div class="media-title mb-1">@item.UserName @item.UserSurname</div>
+                                    <div class="text-time">@item.CommentData.ToShortDateString()</div>
+                                    <div class="media-description text-muted">
+                                        @item.CommentContent
+                                    </div>
+                                    <div class="media-links">
+                                        <a href="@Url.Action("Destiniton", "Destiniton", new { area = "Default", id = item.Destinitonid })">View Reise Ziel</a>
+                                        <div class="bullet"></div>
+                                        <a href="@Url.Action("Delate", "Comment", new { area = "Admin", id = item.id })" class="text-danger">Delate</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @if (Model.Count > 4)
+        {
+            <div class="col-12 col-sm-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                            @foreach (var item in Model.Skip(4))
+                            {
+                                <li class="media">
+                                    <img alt="image" class="mr-3 rounded-circle" width="70" src="@item.UserImage">
+                                    <div class="media-body">
+                                        <div class="media-right">
+                                            @if (item.status)
+                                            {
+                                                <div class="text-success">aktiv</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-warning">deaktiv</div>
+                                            }
+                                        </div>
+                                        <div class="media-title mb-1">@item.UserName @item.UserSurname</div>
+                                        <div class="text-time">@item.CommentData.ToShortDateString()</div>
+                                        <div class="media-description text-muted">
+                                            @item.CommentContent
+                                        </div>
+                                        <div class="media-links">
+                                            <a href="@Url.Action("Destinion", "Destinion", new { area = "Default", id = item.Destinitonid })">View Reise Ziel</a>
+                                            <div class="bullet"></div>
+                                            <a href="@Url.Action("Delate", "Comment", new { area = "Admin", id = item.id })" class="text-danger">Delate</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-12">
+            <nav aria-label="Sayfa navigasyonu">
+                <ul class="pagination justify-content-center">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })"> - Vorherige</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#"> - Vorherige</a>
+                        </li>
+                    }
+
+                    @for (var i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Nächste + </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Nächste + </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+}
+else
+{
+    <h2>Henuz Yorum yok</h2>
+}

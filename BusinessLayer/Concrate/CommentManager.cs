@@ -34,7 +34,7 @@ namespace BusinessLayer.Concrate
 
         public Comment GetById(int id)
         {
-            throw new NotImplementedException();
+            return _icommentdal.Get(id);
         }
 
         public List<Comment> GetCommentsByDestinionID(int id)
@@ -54,7 +54,7 @@ namespace BusinessLayer.Concrate
 
         public void Update(Comment entity)
         {
-            throw new NotImplementedException();
+            _icommentdal.Updater(entity);
         }
     }
 }

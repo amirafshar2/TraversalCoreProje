@@ -1,46 +1,44 @@
 ﻿@using EntityLayer.Concrate
-@model List<Comment>
+@model List<TraversalCoreProje.Areas.Admin.Models.CommentWhitUserModel>
+@if (Model.Count == 0)
+{
+     <div id="comments-list"></div>
 
+}
+else
+{
+    <div class="comments mt-5">
+        <h4 class="side-title ">Comments (@Model.Count)</h4>
+        <div id="comments-list">
+            @foreach (var item in Model)
+            {
+                <div class="media mt-4">
 
-<div class="comments mt-5">
-    <h4 class="side-title ">Comments (@Model.Count)</h4>
+                    <div class="img-circle">
+                        <img src="@item.UserImage" class="img-fluid" alt="...">
+                    </div>
+                    <div class="media-body">
 
-    <div id="comments-list">
+                        <ul class="time-rply mb-2">
+                            <li>
+                                <a href="#URL" class="name mt-0 mb-2 d-block">@item.CommentUser</a>
+                                @item.CommentData.ToLongDateString()
 
-
-        @foreach (var item in Model)
-        {
-
-            <div class="media mt-4">
-
-                <div class="img-circle">
-                    <img src="~/Traversal-Liberty/assets/images/c1.jpg" class="img-fluid" alt="...">
+                            </li>
+                            <li class="reply-last">
+                                <a href="#reply" class="reply">
+                                    Reply
+                                </a>
+                            </li>
+                        </ul>
+                        <p>
+                            @item.CommentContent
+                        </p>
+                    </div>
                 </div>
-                <div class="media-body">
-
-                    <ul class="time-rply mb-2">
-                        <li>
-                            <a href="#URL" class="name mt-0 mb-2 d-block">@item.CommentUser</a>
-                            @item.CommentData.ToLongDateString()
-
-                        </li>
-                        <li class="reply-last">
-                            <a href="#reply" class="reply">
-                                Reply
-                            </a>
-                        </li>
-                    </ul>
-                    <p>
-                        @item.CommentContent
-                    </p>
-                </div>
-            </div>
-        }
-    </div>
-    <input id="idd" type="text" style="visibility:hidden" value="@ViewBag.id">
-
-
-    @*<div class="media">
+            }
+        </div>
+        @*<div class="media">
     <div class="img-circle">
     <img src="~/Traversal-Liberty/assets/images/c2.jpg" class="img-fluid" alt="...">
     </div>
@@ -84,15 +82,24 @@
     </div>
     </div>
     </div>*@
+    </div>
+}
 
-</div>
+<input id="idd" type="text" style="visibility:hidden" value="@Convert.ToInt32(@ViewData["desid"])">
 
 
 
 <div class="leave-comment-form mt-5" id="reply">
-    <h4 class="side-title mb-2">Hinterlasse einen Kommentar</h4>
+    @if (Model.Count == 0)
+    {
+        <h4 class="side-title mb-2">Hinterlasse Ersten Kommentar</h4>
+    }
+    else
+    {
+        <h4 class="side-title mb-2">Hinterlasse einen Kommentar</h4>
+    }
     <p class="mb-4">
-        Ihre E-Mail-Adresse wird nicht veröffentlicht. Erforderliche Felder sind mit * markiert.
+        Ihre E-Mail-Adresse wird nicht veröffentlicht.
     </p>
 
 
@@ -103,7 +110,7 @@
     <div class="input-grids row">
 
         <div class="form-group col-lg-6">
-            <input id="name" style="visibility:hidden;" type="text" name="Name" class="form-control" placeholder="Your Name*"  required="">
+            <input id="name" style="visibility:hidden;" type="text" name="Name" class="form-control" placeholder="Your Name*" required="">
         </div>
         <div id="alert" style="color:red; margin-bottom:10px; display:none;">
             <a id="ale" href="/User/Login/">Login</a>
@@ -120,8 +127,10 @@
 <script>
     $(document).ready(function () {
         var isLoggedIn = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
+         var profileImageUrl = '@ViewData["ProfileImage"]';
 
-       
+
+
 
         $('#commentbtn').click(function () {
             if (!isLoggedIn) {
@@ -161,7 +170,7 @@
             return `
                     <div class="media mt-4">
                         <div class="img-circle">
-                            <img src="/Traversal-Liberty/assets/images/c1.jpg" class="img-fluid" alt="...">
+                            <img src="${profileImageUrl}" class="img-fluid" alt="...">
                         </div>
                         <div class="media-body">
                             <ul class="time-rply mb-2">
