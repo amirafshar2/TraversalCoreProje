@@ -5,6 +5,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         [Area("Admin")]
     public class DashbordController : Controller
     {
+        //degisecek burası
         DataAccessLayer.Concrate.Context c = new DataAccessLayer.Concrate.Context();
              private static int _visitorCount = 0;
         public IActionResult Index()

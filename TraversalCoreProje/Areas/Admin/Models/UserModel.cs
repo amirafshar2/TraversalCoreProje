@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace TraversalCoreProje.Areas.Member.Models
+﻿namespace TraversalCoreProje.Areas.Admin.Models
 {
     public class UserModel
     {
@@ -15,6 +13,5 @@ namespace TraversalCoreProje.Areas.Member.Models
         public string passwordcurrent { get; set; }
         public string passwordconfirm { get; set; }
         public IFormFile ImageFile { get; set; }
-
     }
 }

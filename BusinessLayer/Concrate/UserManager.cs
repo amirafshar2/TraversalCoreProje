@@ -35,12 +35,12 @@ namespace BusinessLayer.Concrate
 
         public void Insert(User entity)
         {
-            throw new NotImplementedException();
+            _userDal.Insert(entity);
         }
 
         public void Update(User entity)
         {
-            throw new NotImplementedException();
+            _userDal.Updater(entity);
         }
     }
 }

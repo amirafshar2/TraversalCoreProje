@@ -9,13 +9,16 @@ namespace TraversalCoreProje.Areas.Member.Components.Layout
     [Area("Member")]
     public class _NavprofileDropdown : ViewComponent
     {
+        #region DI
         private readonly UserManager<User> _userManager;
 
         public _NavprofileDropdown(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
+        #endregion
 
+        #region InvokeAsync
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var q = await _userManager.GetUserAsync(HttpContext.User);
@@ -29,5 +32,6 @@ namespace TraversalCoreProje.Areas.Member.Components.Layout
             }
             return View();
         }
+        #endregion
     }
 }

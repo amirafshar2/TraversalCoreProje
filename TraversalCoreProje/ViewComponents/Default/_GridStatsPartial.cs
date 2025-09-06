@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +8,18 @@ namespace TraversalCoreProje.ViewComponents.Default
 {
     public class _GridStatsPartial : ViewComponent
     {
+        #region DI
+        private readonly IFeatureServic _Featuremanager;
+        public _GridStatsPartial(IFeatureServic featuremanager)
+        {
+            _Featuremanager = featuremanager;
+        }
+        #endregion
+
+        #region Invoke
         public IViewComponentResult Invoke()
         {
-            FeatureManager _Featuremanager = new FeatureManager(new EfFeatureDAL());
+            
             var q = _Featuremanager.GetAll().Where(q=>q.Status == true);
             var w = q.FirstOrDefault();
             if (w != null)
@@ -22,5 +32,6 @@ namespace TraversalCoreProje.ViewComponents.Default
             var f = q.Where(f => f.FeatureId != w.FeatureId).ToList();           
             return View(f);
         }
+        #endregion
     }
 }

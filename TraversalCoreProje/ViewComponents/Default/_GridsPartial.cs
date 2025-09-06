@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,12 +7,22 @@ namespace TraversalCoreProje.ViewComponents.Default
 {
     public class _GridsPartial : ViewComponent
     {
-        DestinitonsManager destinitonsManager = new DestinitonsManager(new EfDestinitionDAL());
+        #region DI
+        private readonly IDestinitionServic _destination;
+
+        public _GridsPartial(IDestinitionServic destination)
+        {
+            _destination = destination;
+        }
+        #endregion
+
+        #region Invoke
         public IViewComponentResult Invoke()
         {
-            var q = destinitonsManager.GetAll();
+            var q = _destination.GetAll();
             return View(q);
         }
-        
+        #endregion
+
     }
 }

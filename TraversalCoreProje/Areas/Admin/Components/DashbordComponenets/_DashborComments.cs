@@ -1,6 +1,8 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
+using EntityLayer.Concrate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProje.Areas.Admin.Models;
@@ -9,13 +11,20 @@ namespace TraversalCoreProje.Areas.Admin.Components.DashbordComponenets
 {
     public class _DashborComments : ViewComponent
     {
-        CommentManager _commentManager = new CommentManager(new EfCommentDAL());
-        DestinitonsManager _destinationmanager = new DestinitonsManager(new EfDestinitionDAL());
+        #region DI
+        private readonly ICommentService _commentManager;
+        private readonly IDestinitionServic _destinationmanager;
         private readonly UserManager<EntityLayer.Concrate.User> _usermanager;
-        public _DashborComments(UserManager<EntityLayer.Concrate.User> usermanager)
+
+        public _DashborComments(ICommentService commentManager, IDestinitionServic destinationmanager, UserManager<User> usermanager)
         {
+            _commentManager = commentManager;
+            _destinationmanager = destinationmanager;
             _usermanager = usermanager;
         }
+        #endregion
+
+        #region Invoke
         public IViewComponentResult Invoke()
         {
             var Commens = _commentManager.GetAll();
@@ -56,5 +65,6 @@ namespace TraversalCoreProje.Areas.Admin.Components.DashbordComponenets
 
             return View(_commentWithDestinationundUserModel);
         }
+        #endregion
     }
 }

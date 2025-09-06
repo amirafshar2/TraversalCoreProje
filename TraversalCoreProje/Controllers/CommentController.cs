@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
@@ -10,16 +11,17 @@ namespace TraversalCoreProje.Controllers
 {
     public class CommentController : Controller
     {
-        Context _context = new Context();
-        CommentManager Bll = new CommentManager(new EfCommentDAL());
-        
+        #region DI
+        private readonly ICommentService _comment;
         private readonly UserManager<User> _usermanager;
-
-        public CommentController(UserManager<User> usermanager)
+        public CommentController(ICommentService comment, UserManager<User> usermanager)
         {
+            _comment = comment;
             _usermanager = usermanager;
         }
+        #endregion
 
+        #region Create Comment
         [HttpGet]
         public IActionResult AddComment()
         {
@@ -37,14 +39,14 @@ namespace TraversalCoreProje.Controllers
                     CommentData = DateTime.Now,
                     status = true,
                     CommentContent = c.CommentContent,
-                    CommentUser = userr.Name+ "" + userr.Surname,
+                    CommentUser = userr.Name + "" + userr.Surname,
                     Destinitonid = c.DestinationId,
-                    Userid= userr.Id
+                    Userid = userr.Id
                 };
 
-                
 
-                Bll.Insert(c1);
+
+                _comment.Insert(c1);
                 return Json(new
                 {
                     success = true,
@@ -63,6 +65,7 @@ namespace TraversalCoreProje.Controllers
 
 
         }
-
+        #endregion
     }
+
 }

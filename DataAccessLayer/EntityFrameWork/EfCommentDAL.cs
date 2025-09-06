@@ -20,5 +20,15 @@ namespace DataAccessLayer.EntityFrameWork
             return q.ToList();
 
         }
+
+        public List<Comment> GetCommentsByUserID(int id)
+        {
+            var values = db.comments.Where(x => x.Userid == id);
+            if (values.Count() != 0)
+            {
+                return values.ToList();
+            }
+            return null;
+        }
     }
 }

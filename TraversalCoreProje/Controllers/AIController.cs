@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class AIController : Controller
 {
+    #region Api Ai
     [HttpPost]
     public async Task<IActionResult> GetCityInfo([FromBody] CityRequest request)
     {
@@ -61,15 +62,15 @@ public class AIController : Controller
 
         return Ok(cityInfos);
     }
+    #endregion
 }
 
-// Gelen AJAX isteği için veri modeli
+#region request ve response models
 public class CityRequest
 {
     public string CityName { get; set; }
 }
 
-// Gemini'dan gelen JSON verisini işlemek için modeller
 public class GeminiResponse
 {
     public List<Candidate> candidates { get; set; }
@@ -90,9 +91,9 @@ public class Part
     public string text { get; set; }
 }
 
-// Sonuç olarak döneceğimiz JSON modeli
 public class CityInfo
 {
     public string title { get; set; }
     public string description { get; set; }
 }
+#endregion

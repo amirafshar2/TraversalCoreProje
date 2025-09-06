@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
 using Microsoft.AspNetCore.Identity;
@@ -11,13 +12,15 @@ namespace TraversalCoreProje.Areas.Member.Controllers
     [Area("Member")]
     public class ReservationController : Controller
     {
-        #region resources
+        #region DI
         private readonly UserManager<User> _usermanager;
-        ReservationManager _bll = new ReservationManager(new EfReservationDAL());
-        DestinitonsManager _destinitonbll = new DestinitonsManager(new EfDestinitionDAL());
-        public ReservationController(UserManager<User> usermanager)
+        private readonly IReservationService _bll;
+        private readonly IDestinitionServic _destinitonbll;
+        public ReservationController(UserManager<User> usermanager, IReservationService bll, IDestinitionServic destinitonbll)
         {
             _usermanager = usermanager;
+            _bll = bll;
+            _destinitonbll = destinitonbll;
         }
         #endregion
 

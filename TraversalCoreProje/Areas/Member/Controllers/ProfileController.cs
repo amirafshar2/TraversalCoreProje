@@ -2,19 +2,23 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalCoreProje.Areas.Member.Models;
-
+using TraversalCoreProje.Models.PicMethods;
 namespace TraversalCoreProje.Areas.Member.Controllers
 {
     [Area("Member")]
     [Route("Member/[controller]/[action]")]
     public class ProfileController : Controller
     {
+        #region DI
         private readonly UserManager<EntityLayer.Concrate.User> _usermanager;
-
+        PicSave _pic = new PicSave();
         public ProfileController(UserManager<User> usermanager)
         {
             _usermanager = usermanager;
         }
+        #endregion
+
+        #region Index
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -22,7 +26,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             {
 
                 var user = await _usermanager.GetUserAsync(HttpContext.User);
-                
+
                 UserModel u = new UserModel()
                 {
                     email = user.Email,
@@ -38,6 +42,9 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             }
             return View(null);
         }
+        #endregion
+
+        #region Update
         [HttpGet]
         public async Task<IActionResult> Update()
         {
@@ -53,29 +60,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             {
                 if (user.ImageFile != null)
                 {
-
-                    if (user.ImageFile != null && user.ImageFile.Length > 0)
-                    {
-                        // مسیر پوشه
-                        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
-
-                        // اگه پوشه وجود نداره، بسازش
-                        if (!Directory.Exists(uploadsFolder))
-                            Directory.CreateDirectory(uploadsFolder);
-
-                        // نام فایل یونیک
-                        var uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(user.ImageFile.FileName);
-
-                        var filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await user.ImageFile.CopyToAsync(stream);
-                        }
-
-                        // مسیر نسبی برای ذخیره تو دیتابیس
-                        u.Image = "/uploads/" + uniqueName;
-                    }
+                    user.image = await _pic.SaveFileAsync(user.ImageFile);
                 }
                 u.Name = user.name;
                 u.PhoneNumber = user.phone;
@@ -97,7 +82,9 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             }
             return View(user);
         }
+        #endregion
 
+        #region PasswordChange
         [HttpPost]
         public async Task<IActionResult> UpdatePassword(UserModel p)
         {
@@ -112,7 +99,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
                     p.surename = u.Surname;
                     p.phone = u.PhoneNumber;
                     p.gender = u.gender;
-                    p.image = u.Image; 
+                    p.image = u.Image;
 
                     var q = await _usermanager.ChangePasswordAsync(u, p.passwordcurrent, p.passwordconfirm);
                     if (q.Succeeded)
@@ -136,14 +123,14 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             {
                 ModelState.AddModelError("", "User not found");
             }
-            
-          
+
+
 
             // اینجا باید همون View رو با مدل برگردونی تا خطاها نمایش داده بشن
             return View("Index", p);  // فرض کردم صفحه تغییر پسوردت Index هست
         }
 
-
+        #endregion
 
     }
 }

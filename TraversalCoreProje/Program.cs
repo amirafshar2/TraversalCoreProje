@@ -8,6 +8,7 @@ using BusinessLayer.Abstract;
 using BusinessLayer.Concrate;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFrameWork;
+using BusinessLayer.Container;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,12 +24,10 @@ builder.Services.AddIdentity<User, Roll>(options =>
 })
 .AddEntityFrameworkStores<Context>()
 .AddDefaultTokenProviders();
-builder.Services.AddScoped<IDestinitionServic,DestinitonsManager>();
-builder.Services.AddScoped<IDestinationDAL,EfDestinitionDAL>();
-builder.Services.AddScoped<ICommentService,CommentManager>();
-builder.Services.AddScoped<ICommentDAL,EfCommentDAL>();
-builder.Services.AddScoped<IUserService,UserManager>();
-builder.Services.AddScoped<IUserDAL,EfUserDAL>();
+builder.Services.ContainerDependencies(); // BusinessLayer'daki baðýmlýlýklarý ekle
+
+
+
 // Session cookie ayarý (tarayýcý kapandýðýnda logout olacak)
 builder.Services.ConfigureApplicationCookie(options =>
 {

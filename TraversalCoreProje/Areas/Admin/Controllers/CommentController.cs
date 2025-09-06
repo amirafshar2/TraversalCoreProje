@@ -54,7 +54,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             return View(value);
         }
         #endregion
-        #region Delate #
+        #region Delate 
         public IActionResult Delate(int id)
         {
             _Bll.Delete(_Bll.GetById(id));

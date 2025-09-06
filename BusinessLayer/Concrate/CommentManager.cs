@@ -47,6 +47,11 @@ namespace BusinessLayer.Concrate
 
         }
 
+        public List<Comment> GetCommentsByUserID(int id)
+        {
+            return _icommentdal.GetCommentsByUserID(id);
+        }
+
         public void Insert(Comment entity)
         {
             _icommentdal.Insert(entity);

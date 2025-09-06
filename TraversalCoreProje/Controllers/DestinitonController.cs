@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrate;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrate;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrate;
 using Microsoft.AspNetCore.Authorization;
@@ -9,17 +10,29 @@ namespace TraversalCoreProje.Controllers
     [AllowAnonymous]
     public class DestinitonController : Controller
     {
-        DestinitonsManager manager = new DestinitonsManager(new EfDestinitionDAL());
+        #region DI
+        private readonly IDestinitionServic _destination;
+
+        public DestinitonController(IDestinitionServic destination)
+        {
+            _destination = destination;
+        }
+        #endregion
+
+        #region Index 
         public IActionResult Index()
         {
-            var q = manager.GetAll();
+            var q = _destination.GetAll();
             return View(q);
                
         }
+        #endregion
+
+        #region Details
         [HttpGet]
         public IActionResult Destiniton(int id)
         {
-            var q= manager.GetById(id);
+            var q= _destination.GetById(id);
             return View(q);
         }
         [HttpPost]
@@ -27,5 +40,6 @@ namespace TraversalCoreProje.Controllers
         {
             return View();
         }
+        #endregion
     }
 }

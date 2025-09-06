@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
     public interface ICommentService : IGenerik_Service<Comment>
     {
         public List<Comment> GetCommentsByDestinionID(int id);
+        public List<Comment> GetCommentsByUserID(int id);
     }
 }

@@ -7,6 +7,7 @@ namespace TraversalCoreProje.ViewComponents.User
 {
     public class _ModalLoginPartial : ViewComponent
     {
+        #region DI
         private readonly UserManager<EntityLayer.Concrate.User> _usermanager;
 
         public _ModalLoginPartial(UserManager<EntityLayer.Concrate.User> usermanager)
@@ -14,6 +15,9 @@ namespace TraversalCoreProje.ViewComponents.User
             _usermanager = usermanager;
         }
         int Userid;
+        #endregion
+
+        #region InvokeAsync
         public async Task<IViewComponentResult> InvokeAsync()
         {
 
@@ -28,5 +32,6 @@ namespace TraversalCoreProje.ViewComponents.User
             }
             return View(null);
         }
+        #endregion
     }
 }

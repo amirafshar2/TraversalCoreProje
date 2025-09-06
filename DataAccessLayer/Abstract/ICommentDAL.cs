@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface ICommentDAL : IGenerikDAL<Comment>
     {
         public List<Comment> GetCommentsByDestinationID(int id);
+        public List<Comment> GetCommentsByUserID(int id);
     }
 }

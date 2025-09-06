@@ -5,8 +5,11 @@ namespace TraversalCoreProje.ViewComponents.Default
 {
     public class _StatsPartial : ViewComponent
     {
+        #region DI Degisecek
         Context context = new Context();
-         
+        #endregion
+
+        #region Invoke
         public IViewComponentResult Invoke ()
         {
             ViewBag.DestinitionsCount = context.destinitons.Count();
@@ -14,5 +17,6 @@ namespace TraversalCoreProje.ViewComponents.Default
             ViewBag.Costumer = "285";
             return View();
         }
+        #endregion
     }
 }
